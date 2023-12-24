@@ -8,7 +8,7 @@ const notoSansJp = Noto_Sans_JP({
 });
 export const metadata: Metadata = {
   title: "Tech Blog",
-  content: "My Developer Blog",
+  description: "My Developer Blog",
 };
 
 export default function RootLayout({
