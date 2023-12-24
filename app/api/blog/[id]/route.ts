@@ -18,10 +18,10 @@ export const GET = async (req: Request, res: NextResponse) => {
 export const PUT = async (req: Request, res: NextResponse) => {
   try {
     const id: string = req.url.split("/blog/")[1];
-    const { title, content } = await req.json();
+    const { title, content, youtubeUrl } = await req.json();
     await connect();
     const post = await prisma.post.update({
-      data: { title, content },
+      data: { title, content, youtubeUrl },
       where: { id },
     });
 

@@ -16,9 +16,11 @@ export const GET = async (req: Request, res: NextResponse) => {
 
 export const POST = async (req: Request, res: NextResponse) => {
   try {
-    const { title, content } = await req.json();
+    const { title, content, youtubeUrl } = await req.json();
     await connect();
-    const post = await prisma.post.create({ data: { title, content } });
+    const post = await prisma.post.create({
+      data: { title, content, youtubeUrl },
+    });
     return NextResponse.json({ message: "Success", post }, { status: 201 });
   } catch (err) {
     return NextResponse.json({ message: "Error", err }, { status: 500 });

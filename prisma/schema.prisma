@@ -13,6 +13,7 @@ datasource db {
 model Post {
   id       String   @id @default(uuid())
   title    String
+  youtubeUrl  String
   content  String
   createAt DateTime @default(now())
   updateAT DateTime @updatedAt

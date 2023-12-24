@@ -19,6 +19,9 @@ const FormSchema = z.object({
   title: z.string().min(2, {
     message: "title must be at least 2 characters.",
   }),
+  youtubeUrl: z.string().min(2, {
+    message: "youtube url must be at least 2 characters.",
+  }),
   content: z.string().min(2, {
     message: "content must be at least 2 characters.",
   }),
@@ -29,6 +32,7 @@ export default function BlogForm() {
     resolver: zodResolver(FormSchema),
     defaultValues: {
       title: "",
+      youtubeUrl: "",
       content: "",
     },
   });
@@ -54,6 +58,22 @@ export default function BlogForm() {
             <FormItem>
               <FormControl>
                 <Input placeholder="title" {...field} className="w-full" />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="youtubeUrl"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <Input
+                  placeholder="youtube url"
+                  {...field}
+                  className="w-full"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
