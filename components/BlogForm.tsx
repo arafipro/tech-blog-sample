@@ -14,6 +14,7 @@ import { toast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import MarkdownPreview from "./markdown/MarkdownPreview";
 
 const FormSchema = z.object({
   title: z.string().min(2, {
@@ -87,6 +88,7 @@ export default function BlogForm() {
               <FormControl>
                 <Textarea placeholder="content" {...field} className="w-full" />
               </FormControl>
+              <MarkdownPreview content={form.getValues().content} />
               <FormMessage />
             </FormItem>
           )}
