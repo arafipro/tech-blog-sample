@@ -1,4 +1,5 @@
 import Header from "@/components/header/Header";
+import { Toaster } from "@/components/ui/toaster";
 import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
@@ -22,6 +23,7 @@ export default function RootLayout({
       <body className={notoSansJp.className}>
         <Header />
         <main className="max-w-7xl mx-auto">{children}</main>
+        <Toaster />
       </body>
     </html>
   );
