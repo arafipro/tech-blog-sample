@@ -34,7 +34,18 @@ export default function BlogForm() {
     },
   });
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
+  async function postBlog(data: Post) {
+    const { title, content } = data;
+    const res = await fetch(`http://localhost:3000/api/blog/`, {
+      method: "POST",
+      body: JSON.stringify({ title, content }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }
+
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
     toast({
       title: "You submitted the following values:",
       description: (
@@ -43,18 +54,33 @@ export default function BlogForm() {
         </pre>
       ),
     });
+    await postBlog(data);
   }
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <Button type="submit" className="w-full">
+          記事投稿
+        </Button>
         <FormField
           control={form.control}
           name="title"
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input placeholder="title" {...field} className="w-full" />
+                <div className="w-full flex break-words gap-4">
+                  <Input
+                    placeholder="title"
+                    {...field}
+                    className="text-lg font-medium leading-relaxed lg:w-1/2"
+                  />
+                  <div>
+                    <h1 className="text-2xl font-bold">
+                      {form.getValues().title}
+                    </h1>
+                  </div>
+                </div>
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -66,16 +92,21 @@ export default function BlogForm() {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Textarea placeholder="content" {...field} className="w-full" />
+                <div className="w-full flex break-words gap-4">
+                  <Textarea
+                    placeholder="content"
+                    {...field}
+                    className="text-lg font-medium leading-relaxed resize-none lg:w-1/2"
+                  />
+                  <div className="overflow-y-auto lg:w-1/2 lg:block hidden">
+                    <MarkdownPreview content={form.getValues().content} />
+                  </div>
+                </div>
               </FormControl>
-              <MarkdownPreview content={form.getValues().content} />
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full">
-          Submit
-        </Button>
       </form>
     </Form>
   );

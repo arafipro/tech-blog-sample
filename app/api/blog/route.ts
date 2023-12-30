@@ -16,7 +16,7 @@ export const GET = async (req: Request, res: NextResponse) => {
 
 export const POST = async (req: Request, res: NextResponse) => {
   try {
-    const { title, content, youtubeUrl } = await req.json();
+    const { title, content } = await req.json();
     await connect();
     const post = await prisma.post.create({
       data: { title, content },
