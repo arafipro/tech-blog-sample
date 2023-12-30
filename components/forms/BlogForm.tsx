@@ -11,22 +11,14 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
+import { FormSchema, FormSchemaType } from "@/lib/validationSchema/FormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
-import MarkdownPreview from "./markdown/MarkdownPreview";
+import { postBlog } from "../../lib/blogApi";
+import MarkdownPreview from "../markdown/MarkdownPreview";
 
-const FormSchema = z.object({
-  title: z.string().min(2, {
-    message: "title must be at least 2 characters.",
-  }),
-  content: z.string().min(2, {
-    message: "content must be at least 2 characters.",
-  }),
-});
-
-export default function BlogForm() {
-  const form = useForm<z.infer<typeof FormSchema>>({
+const BlogForm = () => {
+  const form = useForm<FormSchemaType>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
       title: "",
@@ -34,18 +26,7 @@ export default function BlogForm() {
     },
   });
 
-  async function postBlog(data: Post) {
-    const { title, content } = data;
-    const res = await fetch(`http://localhost:3000/api/blog/`, {
-      method: "POST",
-      body: JSON.stringify({ title, content }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-  }
-
-  async function onSubmit(data: z.infer<typeof FormSchema>) {
+  async function onSubmit(data: FormSchemaType) {
     toast({
       title: "You submitted the following values:",
       description: (
@@ -110,4 +91,6 @@ export default function BlogForm() {
       </form>
     </Form>
   );
-}
+};
+
+export default BlogForm;
