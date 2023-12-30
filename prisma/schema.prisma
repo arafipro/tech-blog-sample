@@ -15,5 +15,5 @@ model Post {
   title    String
   content  String
   createAt DateTime @default(now())
-  updateAT DateTime @updatedAt
+  updateAt DateTime @updatedAt
 }
