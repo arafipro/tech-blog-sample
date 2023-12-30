@@ -19,7 +19,7 @@ export const POST = async (req: Request, res: NextResponse) => {
     const { title, content, youtubeUrl } = await req.json();
     await connect();
     const post = await prisma.post.create({
-      data: { title, content, youtubeUrl },
+      data: { title, content },
     });
     return NextResponse.json({ message: "Success", post }, { status: 201 });
   } catch (err) {

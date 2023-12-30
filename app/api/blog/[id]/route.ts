@@ -21,7 +21,7 @@ export const PUT = async (req: Request, res: NextResponse) => {
     const { title, content, youtubeUrl } = await req.json();
     await connect();
     const post = await prisma.post.update({
-      data: { title, content, youtubeUrl },
+      data: { title, content },
       where: { id },
     });
 
