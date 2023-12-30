@@ -17,12 +17,12 @@ import { useForm } from "react-hook-form";
 import { postBlog } from "../../lib/blogApi";
 import MarkdownPreview from "../markdown/MarkdownPreview";
 
-const BlogForm = () => {
+const BlogForm = ({ title, content }: { title?: string; content?: string }) => {
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      title: "",
-      content: "",
+      title: title ?? "",
+      content: content ?? "",
     },
   });
 
@@ -42,7 +42,7 @@ const BlogForm = () => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <Button type="submit" className="w-full">
-          記事投稿
+          {!title ? "記事投稿" : "記事編集"}
         </Button>
         <FormField
           control={form.control}
@@ -77,7 +77,7 @@ const BlogForm = () => {
                   <Textarea
                     placeholder="content"
                     {...field}
-                    className="text-lg font-medium leading-relaxed resize-none lg:w-1/2"
+                    className="text-lg font-medium leading-relaxed resize-none h-screen lg:w-1/2"
                   />
                   <div className="overflow-y-auto lg:w-1/2 lg:block hidden">
                     <MarkdownPreview content={form.getValues().content} />
