@@ -10,6 +10,7 @@ import {
 import { deletePost } from "@/lib/blogApi";
 import { dateFormat } from "@/utils/dateFormat";
 import { useRouter } from "next/navigation";
+import CustomDialog from "./CustomDialog";
 
 const BlogTable = ({ posts }: { posts: Post[] }) => {
   const router = useRouter();
@@ -44,13 +45,15 @@ const BlogTable = ({ posts }: { posts: Post[] }) => {
               >
                 Edit
               </Button>
-              <Button
-                onClick={async () => {
-                  await deletePost(post.id);
-                }}
-              >
-                Delete
-              </Button>
+              <CustomDialog title="記事を削除しますか？" cancel="キャンセル" ok="削除">
+                <Button
+                  onClick={async () => {
+                    await deletePost(post.id);
+                  }}
+                >
+                  Delete
+                </Button>
+              </CustomDialog>
             </TableCell>
           </TableRow>
         ))}
