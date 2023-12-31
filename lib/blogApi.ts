@@ -30,3 +30,16 @@ export async function postBlog(data: FormSchemaType) {
     },
   });
 }
+
+export async function deletePost(id: string) {
+  const res = await fetch(`http://localhost:3000/api/blog/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  if (!res.ok) {
+    throw new Error("Failed to delete post data");
+  }
+  return res.json();
+}
