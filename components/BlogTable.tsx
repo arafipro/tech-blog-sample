@@ -1,5 +1,3 @@
-"use client";
-
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -11,8 +9,10 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { dateFormat } from "@/utils/dateFormat";
+import { useRouter } from "next/navigation";
 
 const BlogTable = ({ posts }: { posts: Post[] }) => {
+  const router = useRouter();
   return (
     <Table>
       <TableCaption>A list of your recent invoices.</TableCaption>
@@ -32,9 +32,9 @@ const BlogTable = ({ posts }: { posts: Post[] }) => {
             <TableCell>{dateFormat(post.updateAt)}</TableCell>
             <TableCell>
               <Button
-                onClick={() => {
-                  console.log(post.id);
-                }}
+                onClick={async () =>
+                  await router.push(`/blog/${post.id}/detail`)
+                }
               >
                 Preview
               </Button>
