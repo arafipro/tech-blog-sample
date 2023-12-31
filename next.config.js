@@ -1,11 +1,4 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  resolve: {
-    fallback: {
-      crypto: require.resolve("crypto-browserify"),
-      // 他に必要なモジュールがあれば追加
-    },
-  },
-};
+const nextConfig = {};
 
 module.exports = nextConfig;

@@ -3,7 +3,6 @@ import { Toaster } from "@/components/ui/toaster";
 import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
-export const runtime = "edge";
 
 const notoSansJp = Noto_Sans_JP({
   subsets: ["latin"],

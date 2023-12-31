@@ -4,7 +4,6 @@ import MarkdownPreview from "@/components/markdown/MarkdownPreview";
 import { getPost } from "@/lib/blogApi";
 import { dateFormat } from "@/utils/dateFormat";
 import { useEffect, useState } from "react";
-export const runtime = "edge";
 
 export default function Page({ params }: { params: { id: string } }) {
   const [post, setPost] = useState<Post>();
