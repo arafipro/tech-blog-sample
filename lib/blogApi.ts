@@ -5,7 +5,17 @@ export async function getAllPosts() {
     cache: "no-cache",
   });
   if (!res.ok) {
-    throw new Error("Failed to fetch data");
+    throw new Error("Failed to fetch posts data");
+  }
+  return res.json();
+}
+
+export async function getPost(id: string) {
+  const res = await fetch(`http://localhost:3000/api/blog/${id}`, {
+    cache: "no-cache",
+  });
+  if (!res.ok) {
+    throw new Error("Failed to fetch post data");
   }
   return res.json();
 }

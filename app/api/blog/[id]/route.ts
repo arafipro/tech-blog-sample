@@ -6,8 +6,8 @@ export const GET = async (req: Request, res: NextResponse) => {
   try {
     const id: string = req.url.split("/blog/")[1];
     await connect();
-    const posts = await prisma.post.findFirst({ where: { id } });
-    return NextResponse.json({ message: "Success", posts }, { status: 200 });
+    const post = await prisma.post.findFirst({ where: { id } });
+    return NextResponse.json({ message: "Success", post }, { status: 200 });
   } catch (err) {
     return NextResponse.json({ message: "Error", err }, { status: 500 });
   } finally {
